@@ -9,6 +9,7 @@ import { connectDB } from "./db.js";
 import authRoutes from "./routes/auth.js";
 import patientRoutes from "./routes/patients.js"; 
 
+dotenv.config();
 
 connectDB();
 
@@ -16,11 +17,9 @@ connectDB();
 
 
 
-dotenv.config();
+
+
 // ✅ Add these debug logs
-console.log("🔑 GEMINI_API_KEY exists?", !!process.env.GEMINI_API_KEY);
-console.log("🔑 ELEVENLABS_API_KEY exists?", !!process.env.ELEVENLABS_API_KEY);
-console.log("🔑 ELEVENLABS_API_KEY first 10 chars:", process.env.ELEVENLABS_API_KEY?.substring(0, 10));
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const app = express();
@@ -286,7 +285,9 @@ Keep response concise, structured, and actionable.
 
 
 
-app.listen(5000, () => console.log("✅ AI backend running on http://localhost:5000"));
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`✅ AI backend running on port ${PORT}`));
 
 
 

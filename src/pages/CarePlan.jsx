@@ -5,6 +5,8 @@ import LanguageToggle from "../components/common/LanguageToggle";
 import AICard from "../components/common/AICard";
 import formatAIText from "../utils/temp";
 import AISkeleton from "../components/common/AISkeleton";
+import API_URL from "../config";
+
 
 export default function CarePlan() {
   const { id } = useParams();
@@ -42,7 +44,7 @@ export default function CarePlan() {
 
       const cleanedText = cleanTextForTTS(text);
 
-      const res = await fetch("http://localhost:5000/api/tts", {
+      const res = await fetch(`${API_URL}/api/tts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -102,7 +104,7 @@ export default function CarePlan() {
     const fetchCarePlan = async () => {
       setLoading(true);
       try {
-        const res = await fetch("http://localhost:5000/api/care", {
+        const res = await fetch(`${API_URL}/api/care`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import VoiceInput from "../components/voice/VoiceInput";
+import API_URL from "../config";
 
 export default function AddPatient({ onSave }) {
   const { t, user } = useAppContext();
@@ -39,7 +40,7 @@ export default function AddPatient({ onSave }) {
       const formData = new FormData();
       formData.append("report", file);
 
-      const res = await fetch("http://localhost:5000/api/scan-report", {
+      const res = await fetch(`${API_URL}/api/scan-report`, {
         method: "POST",
         body: formData,
       });
